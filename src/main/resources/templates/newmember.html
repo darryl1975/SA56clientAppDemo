@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Management System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Member Management System</h1>
+        <hr>
+        <h2>New Member</h2>
+
+        <form action="#" th:action="@{/save}" th:object="${memberForm}" method="POST">
+            <input type="text" th:field="*{fullName}" placeholder="Full Name" class="form-control mb-4 col-4">
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></div>
+            <input type="text" th:field="*{email}" placeholder="Email" pattern="[^ @]*@[^ @]*"
+                class="form-control mb-4 col-4">
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+            
+            <input type="password" th:field="*{password}" placeholder="Password" class="form-control mb-4 col-4">
+            
+            <input type="tel" th:field="*{mobilePhone}" placeholder="Mobile Phone Number"
+                class="form-control mb-4 col-4">
+            <input type="number" th:field="*{postalCode}" placeholder="Postal Code" min="111111" max="999999"
+                class="form-control mb-4 col-4">
+            <input type="number" th:field="*{birthDay}" placeholder="Day of Birth" min="1" max="31"
+                class="form-control mb-4 col-4">
+            <input type="number" th:field="*{birthMonth}" placeholder="Month of Birth" min="1" max="12"
+                class="form-control mb-4 col-4">
+
+            <select name="roles" th:field="*{role.id}">
+                <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.description}"></option>
+            </select>
+
+            <br>
+            <br>
+            <button type="submit" class="btn btn-info col-2">Save Member</button>
+        </form>
+
+        <hr>
+
+        <a th:href="@{/memberlisting}"> Back to Member List</a>
+    </div>
+</body>
+
+</html>
